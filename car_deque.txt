@@ -7,7 +7,7 @@ int main()
 {
 	setlocale(LC_ALL, "Rus");
 	deque<string> D; //создание пустой очереди D
-
+//main function
 	string car_mark;
 	int num = 0;
 	char number;
