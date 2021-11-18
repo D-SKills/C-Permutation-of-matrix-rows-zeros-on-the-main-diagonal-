@@ -1,0 +1,129 @@
+#include <iostream>
+#include <string>
+#include <deque>
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	deque<string> D; //создание пустой очереди D
+
+	string car_mark;
+	int num = 0;
+	char number;
+	do
+	{
+		cout << "1. Добавить автомобиль в конец очереди" << endl;
+		cout << "2. Удалить автомобиль [по его марке]" << endl;
+		cout << "3. Узнать номер автомобиля в очереди [по его марке]" << endl;
+		cout << "4. Узнать марку автомобиля [по его номеру в очереди]" << endl;
+		cout << "5. Просмотр очереди" << endl;
+		cout << "6. Выход\n\n";
+		cout << "Введите номер пункта меню > ";
+		cin >> number;
+
+		switch (number)
+		{
+		case '1':
+		{	cout << "\nВведите марку авто > "; cin >> car_mark;
+		D.push_back(car_mark);
+		cout << "Автомобиль добавлен в очередь !\n";
+		break;
+		}
+		case '2':
+		{
+			cout << endl << "Введите марку автомобиля:\n\n";
+			cin >> car_mark;
+			for (auto it = D.begin(); it != D.end(); it++)
+			{
+				if (*it == car_mark)
+				{
+					if (it != D.begin())
+						it = D.erase(it) - 1;
+					else
+					{
+						D.erase(it);
+						break;
+					}
+				}
+			}
+			cout << endl << "Автомобиль удален из очереди !\n\n";
+			break;
+		}
+		case '3':
+		{
+			cout << endl << "Введите марку автомобиля:\n\n";
+			cin >> car_mark;
+			int n = 1;
+			bool chek = false;
+			if (D.size() > 0)
+			{
+
+				for (auto it = D.begin(); n <= D.size(); it++, n++)
+				{
+
+					if (*it == car_mark)
+					{
+						chek = true;
+						cout << "Автомобиль находится на " << n << " месте в очереди !" << endl;
+
+					}
+
+				}
+				if (chek == false)
+				{
+					cout << "В очереди нет автомобиля марки -> " << car_mark << endl;
+				}
+			}
+			else cout << "Очередь пуста !" << endl;
+			break;
+		}
+		case '4':
+		{
+			int i = 1;
+			cout << endl << "Введите номер автомобиля в очереди:\n\n";
+			cin >> num;
+			if (num > D.size())
+				cout << "Такого номера не существует ! Размер очереди меньше указанного номера !" << endl;
+			if (D.size() != 0)
+			{
+				for (auto it = D.begin(); it != D.end(); it++, i++)
+				{
+					if (i == num)
+					{
+						cout << "На " << num << " месте в очереди находится автомобиль марки " << *it << " !" << endl;
+					}
+				}
+			}
+			else cout << "Очередь пуста !" << endl;
+			break;
+		}
+		case '5':
+		{
+			if (D.size() != 0)
+			{
+				for (auto it = D.begin(); it != D.end(); it++)
+				{
+					cout << *it << " | ";
+				}
+				cout << endl;
+			}
+			else
+			{
+				cout << "Очередь пуста!" << endl;
+			}
+			break;
+		}
+		case '6':
+		{
+			cout << endl << "Программа завершена ! \n";
+			break;
+		}
+		default: cout << endl << "Ошибка! Введена неверная команда ! \n";
+			break;
+		}
+		cout << endl;
+	} while (number != '6');
+
+	return 0;
+}
